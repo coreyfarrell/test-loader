@@ -17,3 +17,8 @@ https://github.com/nodejs/node/commit/c4f2cf9fd25e76e61712dd1143ced08cfc1d9530 (
 This will show that the process just dies, I'm unable to determine a reason.  I was able to reduce
 the issue to just calling `test-exclude` which is used by `@istanbuljs/esm-loader-hook` to
 decide if a file gets coverage or not.
+
+
+Update: I think this is somehow caused by the event loop of the main thread thinking it
+has nothing to do.  This is shown by adding the `fix` argument which activates a `setInterval`
+while the async import is occurring.
